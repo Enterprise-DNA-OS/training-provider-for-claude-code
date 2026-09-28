@@ -61,7 +61,7 @@ try {
   assert.equal(cli(["enrolments"]).length, 4);
   assert.equal(cli(["attention"]).length, 2);
   assert.equal(cli(["assessment-chase"]).length, 3);
-  assert.equal(cli(["attendance-gaps"])[0].absences, 1);
+  assert.equal(Number(cli(["attendance-gaps"])[0].absences), 1);
   const fees = cli(["fees-overdue"]);
   assert.equal(fees.length, 2);
   assert.deepEqual(
