@@ -6,7 +6,7 @@ Learners, courses, attendance, results, fees and the Monday review in a database
 | --- | --- | --- |
 | Free source. Follow the quick start. | Your fields, course rules, Wisenet migration, reports, a web interface or a different stack. | Installed, connected and operated through Omni by Enterprise DNA. One setup fee, then a retainer. |
 
-[Talk to Sam](https://enterprisedna.co/omni/book?offer=replace-software&utm_campaign=wisenet&utm_medium=readme) · [Instead of Wisenet](https://enterprisedna.co/omni/instead-of/wisenet)
+[Talk to Sam](https://enterprisedna.co/omni/book?offer=replace-software&utm_campaign=wisenet&utm_medium=readme) · [Instead of Wisenet](https://enterprisedna.co/omni/instead-of/wisenet?utm_source=github&utm_medium=readme&utm_campaign=wisenet)
 
 Works with Claude Code, Codex, OpenCode or Cursor. Read AGENTS.md and CLAUDE.md.
 
