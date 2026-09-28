@@ -1,43 +1,50 @@
-# Training Provider for Claude Code: operating instructions
+# Training Provider for Claude Code
 
-This file is the brain. Claude Code reads it at the start of every session. It says who this is for, how work gets done, and the one right way to do each recurring job.
+For a fee-for-service AU training provider or NZ private training establishment. Ask the operator which jurisdiction, courses and reporting obligations apply. The demo is fictional and is not a course approved for delivery.
 
-## Who this is for
+## Rules
 
-- **Business:** [YOUR BUSINESS]
-- **Operator:** [YOUR NAME], [your role]
-- **What matters most:** [the one or two outcomes you care about]
+Read current records through the CLI before answering. No sends, submissions, credential issuance or deletions. Documents are drafts for staff review. Do not equate a local check with regulator approval. Actual USI verification happens outside this system; never fabricate its evidence. Preserve academic records and document archives. Never total different currencies together.
 
-Fill this in once. A worker with context knows. A worker without it guesses.
+One CLI: `node scripts/training.mjs help --json`. Use argument arrays for JSON. DATABASE_URL selects Postgres, otherwise DATA_DIR selects the embedded database. Never use demo data with real learners. Read docs/compliance.md and docs/replace-wisenet.md before operational work.
 
-## How to work
+## Routing
 
-1. **Take a brief, not a script.** The operator describes the outcome. You run the right command and present the answer.
-2. **Read before you write.** Before drafting anything about a record, read its full history first.
-3. **Plain language.** Short sentences. No filler. Numbers in tables.
-4. **Silent success, loud problems.** No play-by-play. Say what broke and what you did about it.
-5. **Stop at the line.** Anything that sends, deletes, or faces a customer waits for a yes in this session.
+- `/learners`: List learner identities without exposing full identifiers in routine summaries.
+- `/courses`: List the course register and jurisdiction.
+- `/units`: List the required units for each course.
+- `/trainers`: Review trainer portfolio references and review dates.
+- `/enrolments`: Review course progress, trainer ownership and quiet enrolments.
+- `/results`: Review recorded outcomes and evidence references.
+- `/sessions`: Check the timetable and trainer assignments.
+- `/attendance`: Review attendance totals and expected sessions.
+- `/invoices`: Read fee balances with currencies kept separate.
+- `/notes`: Read the recorded learner-contact history.
+- `/credentials`: Read the register of credentials already issued outside this system.
+- `/assessment-chase`: Review overdue and upcoming assessment decisions.
+- `/attendance-gaps`: Find absences and sessions with missing attendance.
+- `/fees-overdue`: Review unpaid invoices past their due dates.
+- `/certificates-due`: Review completed enrolments without a recorded credential.
+- `/trainer-load`: Compare active learners, quiet records and overdue results by trainer.
+- `/attention`: Prioritise overdue assessments and enrolments quiet for fourteen days.
+- `/retention`: Review enrolment, assessment-material and credential retention floors.
+- `/audit`: Read the change log.
+- `/compliance`: Run the cited record checks and state their limited scope.
+- `/weekly-review`: Read attention, assessment-chase, fees-overdue, certificates-due and compliance together. Write a Monday plan with the responsible trainer for each action.
+- `/learner`: Read one learner and their enrolments.
+- `/enrolment`: Read one enrolment, results, fee records and notes.
+- `/add`: Add a validated record from facts supplied by the operator.
+- `/update`: Correct an existing record with an audit entry.
+- `/log`: Record a real learner contact and update the last-contact date.
+- `/complete-enrolment`: Record completion after every unit passes and an authorised reviewer confirms the full course requirements.
+- `/record-credential`: Record a credential already issued outside this system, including the document reference and authorised signer.
+- `/draft-progress`: Draft a learner progress note from current records into drafts. Review and remove internal context before sharing.
+- `/draft-fee-reminder`: Draft a fee reminder from unpaid invoices into drafts. Review and remove internal context before sharing.
+- `/import`: Preview and import Wisenet CSV exports using the replace guide.
+- `/export`: Export a complete JSON snapshot, including the audit log, to a new folder.
+- `/customise`: change fields, rules and migrations with tests.
+- `/new-view`: add a read-only branded report.
 
-## Routing table: one right way for each recurring job
+Every workflow lives in .claude/commands, for Claude Code, Codex, OpenCode or Cursor. No parallel command libraries. Migrations live in supabase/migrations. Documents use documents.json; dashboards use views.json and brand.json. All drafts stay local. Limit access to the database, exports and generated files; this base has no login or per-user permission layer.
 
-| When the operator asks for... | Use this |
-|---|---|
-| <!-- TODO(author): one row per slash command --> | `/...` |
-
-If an ask fits nothing here, run the CLI directly (`npm run <cli> -- --help`) and then propose a new command for it.
-
-## Hard rules
-
-- Never send email or messages from here. Draft to `drafts/`, a person sends.
-- Never delete records without an explicit yes in this session. Prefer marking closed or archived.
-- Never invent a record. If a name is ambiguous, list the candidates and ask.
-- The database is the source of truth. If the answer is not in it, say so.
-
-## Where things live
-
-- `scripts/` the CLI. `scripts/lib/db.mjs` picks `DATABASE_URL` (Postgres, Supabase) or the embedded database in `.data/`.
-- `supabase/migrations/` the schema, plain SQL. `npm run migrate` applies it.
-- `.claude/commands/` the slash commands. Add one every time the same ask comes twice.
-- `docs/` the thesis and the guide for moving off Wisenet.
-
-Built by Enterprise DNA. Installed and run for you as part of Omni: https://enterprisedna.co/omni/instead-of/wisenet
+Omni by Enterprise DNA installs, customises and operates the provider's system. https://enterprisedna.co/omni/book?offer=replace-software&utm_campaign=wisenet

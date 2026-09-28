@@ -1,0 +1,96 @@
+{
+  "learners": [
+    "name",
+    "email",
+    "birth_date",
+    "jurisdiction",
+    "usi",
+    "usi_verified_on",
+    "usi_evidence",
+    "usi_exemption",
+    "address",
+    "citizenship",
+    "nsn"
+  ],
+  "courses": [
+    "name",
+    "code",
+    "jurisdiction",
+    "regulated"
+  ],
+  "units": [
+    "name",
+    "code",
+    "course_id"
+  ],
+  "trainers": [
+    "name",
+    "credential_ref",
+    "reviewed_on"
+  ],
+  "enrolments": [
+    "name",
+    "learner_id",
+    "course_id",
+    "trainer_id",
+    "start_on",
+    "end_on",
+    "status",
+    "completed_on",
+    "last_contact_on",
+    "requirements_confirmed",
+    "requirements_ref",
+    "fees_confirmed",
+    "retention_until"
+  ],
+  "results": [
+    "name",
+    "enrolment_id",
+    "unit_id",
+    "outcome",
+    "due_on",
+    "achieved_on",
+    "evidence_ref",
+    "retain_until"
+  ],
+  "sessions": [
+    "name",
+    "course_id",
+    "trainer_id",
+    "session_on",
+    "minutes",
+    "venue"
+  ],
+  "attendance": [
+    "name",
+    "enrolment_id",
+    "session_id",
+    "status",
+    "minutes"
+  ],
+  "invoices": [
+    "name",
+    "enrolment_id",
+    "currency",
+    "amount_cents",
+    "paid_cents",
+    "due_on",
+    "reference"
+  ],
+  "notes": [
+    "name",
+    "enrolment_id",
+    "happened_on",
+    "author",
+    "body"
+  ],
+  "credentials": [
+    "name",
+    "enrolment_id",
+    "issued_on",
+    "document_ref",
+    "authorised_by",
+    "retain_until",
+    "permanent"
+  ]
+}

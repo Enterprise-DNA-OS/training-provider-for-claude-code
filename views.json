@@ -1,13 +1,47 @@
 [
   {
     "name": "week",
-    "title": "This week",
-    "subtitle": "Training Provider for Claude Code: what needs attention, rendered by npm run view",
+    "title": "Training week",
     "sections": [
       {
-        "title": "Needs attention",
-        "note": "TODO(author): point this at the industry's attention view (overdue, stuck, quiet).",
-        "sql": "select 'replace me' as item, 'TODO(author)' as why"
+        "title": "Learners needing contact",
+        "sql": "select learner,trainer,quiet_days,overdue_results from enrolment_board where status='active' and quiet_days>=14"
+      },
+      {
+        "title": "Assessments to review",
+        "sql": "select learner,unit,outcome,due_on,trainer from assessment_queue where outcome in ('pending','not-yet-competent')"
+      }
+    ]
+  },
+  {
+    "name": "fees",
+    "title": "Outstanding learner fees",
+    "sections": [
+      {
+        "title": "Balances by currency",
+        "sql": "select currency,sum(balance_cents) as balance_cents from fee_balances where balance_cents>0 group by currency"
+      },
+      {
+        "title": "Overdue invoices",
+        "sql": "select learner,invoice,currency,balance_cents,due_on from fee_balances where balance_cents>0 and due_on<current_date"
+      }
+    ]
+  },
+  {
+    "name": "completion",
+    "title": "Completion and retention review",
+    "sections": [
+      {
+        "title": "Credential review",
+        "sql": "select learner,jurisdiction,review_due_on,identity_recorded,fees_confirmed from certificate_queue where credential is null"
+      },
+      {
+        "title": "Attendance follow-up",
+        "sql": "select enrolment,learner,recorded_sessions,scheduled_sessions,absences from attendance_summary"
+      },
+      {
+        "title": "Retention register",
+        "sql": "select * from retention_register"
       }
     ]
   }

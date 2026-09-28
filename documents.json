@@ -1,11 +1,84 @@
 [
   {
-    "name": "example",
-    "title": "TODO(author): the first document this industry must produce",
-    "for_each": "select gen_random_uuid() as id, 'Example' as name",
-    "file": "name",
+    "name": "progress",
+    "title": "Draft learner progress report",
+    "for_each": "select id,name from enrolments order by name",
+    "file": "id",
     "sections": [
-      { "title": "Details", "sql": "select 'replace me' as item, $1::text as record_id" }
+      {
+        "title": "Enrolment",
+        "sql": "select b.learner,b.course,b.status,b.start_on,b.end_on from enrolment_board b where b.id=$1",
+        "note": "Staff review required. This is not an issued qualification or statement of attainment."
+      },
+      {
+        "title": "Results",
+        "sql": "select u.code,u.name,r.outcome,r.achieved_on,r.evidence_ref from results r join units u on u.id=r.unit_id where enrolment_id=$1",
+        "note": "Staff review required. This is not an issued qualification or statement of attainment."
+      },
+      {
+        "title": "Attendance",
+        "sql": "select * from attendance_summary where id=$1",
+        "note": "Staff review required. This is not an issued qualification or statement of attainment."
+      }
+    ]
+  },
+  {
+    "name": "fee-statement",
+    "title": "Draft learner fee statement",
+    "for_each": "select id,name from enrolments order by name",
+    "file": "id",
+    "sections": [
+      {
+        "title": "Learner",
+        "sql": "select learner,course from enrolment_board where id=$1",
+        "note": "Staff review required. This is not an issued qualification or statement of attainment."
+      },
+      {
+        "title": "Invoices",
+        "sql": "select name,currency,amount_cents,paid_cents,amount_cents-paid_cents as balance_cents,due_on from invoices where enrolment_id=$1",
+        "note": "Staff review required. This is not an issued qualification or statement of attainment."
+      }
+    ]
+  },
+  {
+    "name": "assessment-plan",
+    "title": "Draft assessment follow-up plan",
+    "for_each": "select id,name from enrolments order by name",
+    "file": "id",
+    "sections": [
+      {
+        "title": "Learner and trainer",
+        "sql": "select learner,course,trainer from enrolment_board where id=$1",
+        "note": "Staff review required. This is not an issued qualification or statement of attainment."
+      },
+      {
+        "title": "Assessments",
+        "sql": "select u.code,u.name,r.outcome,r.due_on,r.evidence_ref from results r join units u on u.id=r.unit_id where enrolment_id=$1",
+        "note": "Staff review required. This is not an issued qualification or statement of attainment."
+      }
+    ]
+  },
+  {
+    "name": "record-of-results",
+    "title": "Draft record of results",
+    "for_each": "select id,name from enrolments order by name",
+    "file": "id",
+    "sections": [
+      {
+        "title": "Learner",
+        "sql": "select learner,course,status,completed_on from enrolment_board where id=$1",
+        "note": "Staff review required. This is not an issued qualification or statement of attainment."
+      },
+      {
+        "title": "Achieved results",
+        "sql": "select u.code,u.name,r.outcome,r.achieved_on from results r join units u on u.id=r.unit_id where enrolment_id=$1 and r.outcome in ('competent','credit-transfer','rpl')",
+        "note": "Staff review required. This is not an issued qualification or statement of attainment."
+      },
+      {
+        "title": "Previously issued credential reference",
+        "sql": "select name,issued_on,document_ref,authorised_by from credentials where enrolment_id=$1",
+        "note": "Staff review required. This is not an issued qualification or statement of attainment."
+      }
     ]
   }
 ]
